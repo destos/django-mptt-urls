@@ -1,0 +1,9 @@
+fabric
+mox>=0.5.3
+tox
+django-nose
+nose
+django-mptt
+model_mommy
+ipython
+ipdb
