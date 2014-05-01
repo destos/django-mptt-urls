@@ -12,8 +12,12 @@ def process_url(request, url, settings):
     if slug_list[-1] == '':
         del slug_list[-1]  # Delete empty slug after last slash
 
-    node_slug_field = settings['node'].get('slug_field', 'slug')
-    leaf_slug_field = settings['leaf'].get('slug_field', 'slug')
+    try:
+        node_slug_field = settings['node'].get('slug_field', 'slug')
+        leaf_slug_field = settings['leaf'].get('slug_field', 'slug')
+    except KeyError, e:
+        raise ImproperlyConfigured('%s settings cannot be missing from '
+                                   'mptt_urls settings' % e)
 
     node_model = import_by_path(settings['node']['model'])
     leaf_model = import_by_path(settings['leaf']['model'])
@@ -54,7 +58,8 @@ def process_url(request, url, settings):
     view = settings[object_type].get('view', None)
 
     if view and template:
-        raise ImproperlyConfigured('"template" and "view" values cannot be used simultaneously in mptt_urls settings')
+        raise ImproperlyConfigured('"template" and "view" values cannot be '
+                                   'used simultaneously in mptt_urls settings')
     elif view:
         view = import_by_path(view)
         if hasattr(view, 'as_view'):
@@ -76,4 +81,5 @@ def process_url(request, url, settings):
             }
         )
     else:
-        raise ImproperlyConfigured('Cannot find "template" or "view" value in mptt_urls settings')
+        raise ImproperlyConfigured('Cannot find "template" or "view" value '
+                                   'in mptt_urls settings')
