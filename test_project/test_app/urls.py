@@ -23,10 +23,18 @@ mptt_urls_gallery_settings = {
     }
 }
 
+# Works with namespaces
+namespaced_url = patterns(
+    url_mptt(r'^gallery/(?P<url>.*)',
+        name='gallery_spaced',
+        settings=mptt_urls_gallery_settings),  # Here we add special mptt url
+)
+
 urlpatterns = patterns(
     '',
     url(r'^$', TemplateView.as_view(template_name='home.html')),
     url_mptt(r'^gallery/(?P<url>.*)', name='gallery', settings=mptt_urls_gallery_settings),  # Here we add special mptt url
 
+    url(r'^named/', include(namespaced_url), namespace='named')
     url(r'^admin/', include(admin.site.urls)),
 )

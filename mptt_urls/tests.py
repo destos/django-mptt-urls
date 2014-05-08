@@ -7,7 +7,7 @@ from model_mommy import mommy
 
 from mptt_urls import url_mptt, superroot
 from mptt_urls.views import process_url
-from test_app.gallery.models import Category, Photo
+from test_project.gallery.models import Category, Photo
 
 
 class InvalidConfigTest(TestCase):
@@ -25,7 +25,7 @@ class InvalidConfigTest(TestCase):
         # test leaf being required
         settings = {
             'node': {
-                'model': 'test_app.gallery.models.Category'
+                'model': 'test_project.gallery.models.Category'
             }
         }
         with self.assertRaisesRegexp(
@@ -35,7 +35,7 @@ class InvalidConfigTest(TestCase):
         # test node being required
         settings = {
             'leaf': {
-                'model': 'test_app.gallery.models.Photo'
+                'model': 'test_project.gallery.models.Photo'
             }
         }
         with self.assertRaisesRegexp(
@@ -45,12 +45,12 @@ class InvalidConfigTest(TestCase):
     def test_template_view_redundant(self):
         settings = {
             'node': {
-                'model': 'test_app.gallery.models.Category',
+                'model': 'test_project.gallery.models.Category',
                 'template': 'a.template',
                 'view': 'a.view'
             },
             'leaf': {
-                'model': 'test_app.gallery.models.Photo'
+                'model': 'test_project.gallery.models.Photo'
             },
         }
         with self.assertRaisesRegexp(
@@ -61,10 +61,10 @@ class InvalidConfigTest(TestCase):
     def test_template_view_leaf_redeundant(self):
         settings = {
             'node': {
-                'model': 'test_app.gallery.models.Category',
+                'model': 'test_project.gallery.models.Category',
             },
             'leaf': {
-                'model': 'test_app.gallery.models.Photo',
+                'model': 'test_project.gallery.models.Photo',
                 'template': 'a.template',
                 'view': 'a.view'
             },
@@ -77,10 +77,10 @@ class InvalidConfigTest(TestCase):
     def test_template_view_missing(self):
         settings = {
             'node': {
-                'model': 'test_app.gallery.models.Category'
+                'model': 'test_project.gallery.models.Category'
             },
             'leaf': {
-                'model': 'test_app.gallery.models.Photo'
+                'model': 'test_project.gallery.models.Photo'
             }
         }
         with self.assertRaisesRegexp(

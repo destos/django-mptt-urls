@@ -14,7 +14,7 @@ NAME = os.path.basename(os.path.dirname(__file__))
 ROOT = os.path.abspath(os.path.dirname(__file__))
 APP_NAME = 'mptt_urls'
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'test_app.test_app.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'test_project.test_app.settings'
 os.environ['PYTHONPATH'] = os.pathsep.join([ROOT, ])
 
 _local = functools.partial(_local, capture=False)

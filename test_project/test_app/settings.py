@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
-ROOT_URLCONF = 'test_app.test_app.urls'
+ROOT_URLCONF = 'test_project.test_app.urls'
 
 ALLOWED_HOSTS = []
 
@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_nose',
-    'test_app.test_app',
-    'test_app.gallery',
+    'test_project.test_app',
+    'test_project.gallery',
     'mptt',
 )
 
