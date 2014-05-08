@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/destos/django-mptt-urls.png?branch=master)](https://travis-ci.org/destos/django-mptt-urls)
+[![Coverage Status](https://coveralls.io/repos/destos/django-mptt-urls/badge.png)](https://coveralls.io/r/destos/django-mptt-urls)
+
 Overview
 --------
 
@@ -103,7 +106,7 @@ INSTALLED_APPS = (
 )
 ```
 
-Then, in your `urls.py`, 
+Then, in your `urls.py`,
 * import: `from mptt_urls import url_mptt`
 * add a variable `mptt_urls_gallery_settings` containing gallery settings,
 * add url `url_mptt` :

@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
-ROOT_URLCONF = 'test_app.urls'
+ROOT_URLCONF = 'test_app.test_app.urls'
 
 ALLOWED_HOSTS = []
 
@@ -40,13 +40,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_nose',
     'test_app.test_app',
-    'mptt',
     'test_app.gallery',
+    'mptt',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ('--nocapture', )
-
+SOUTH_TESTS_MIGRATE = False
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,6 +84,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
 
 CACHES = dict(
     default=dict(BACKEND='django.core.cache.backends.dummy.DummyCache'))
