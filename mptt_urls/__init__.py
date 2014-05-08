@@ -1,7 +1,5 @@
 # coding: utf-8
 
-from importlib import import_module
-
 from django.utils.module_loading import import_by_path
 from django.conf.urls import url
 from django.core.urlresolvers import reverse
@@ -9,7 +7,8 @@ from django.core.urlresolvers import reverse
 
 def url_mptt(url_string, name, settings):
     '''
-    This wrapper creates and returns a usual url() object, and additionally sets get_absolute_url() methods for all models mentioned in settings
+    This wrapper creates and returns a usual url() object, and additionally
+    sets get_absolute_url() methods for all models mentioned in settings
     '''
 
     leaf_model = import_by_path(settings['leaf']['model'])
@@ -20,18 +19,25 @@ def url_mptt(url_string, name, settings):
         slug_list = []
         if isinstance(instance, leaf_model):
             # Model is leaf
-            slug_list.append(getattr(instance, settings['leaf'].get('slug_field', 'slug')))
-            instance = getattr(instance, settings['leaf'].get('parent', 'parent'))
+            slug_list.append(
+                getattr(instance, settings['leaf'].get('slug_field', 'slug')))
+            instance = getattr(
+                instance,
+                settings['leaf'].get('parent', 'parent'))
         while instance is not None:
-            slug_list.append(getattr(instance, settings['node'].get('slug_field', 'slug')))
-            instance = getattr(instance, settings['node'].get('parent', 'parent'))
+            slug_list.append(
+                getattr(instance, settings['node'].get('slug_field', 'slug')))
+            instance = getattr(
+                instance,
+                settings['node'].get('parent', 'parent'))
 
         return reverse(name, kwargs={'url': '/'.join(reversed(slug_list))})
 
     leaf_model.get_absolute_url = get_absolute_url
     node_model.get_absolute_url = get_absolute_url
 
-    return url(url_string, 'mptt_urls.views.process_url', {'settings': settings}, name=name)
+    return url(url_string, 'mptt_urls.views.process_url', {
+        'settings': settings}, name=name)
 
 
 def superroot(model):
